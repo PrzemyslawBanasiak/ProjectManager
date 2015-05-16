@@ -1,13 +1,18 @@
 class User < ActiveRecord::Base
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
-  validates :name,  presence: true, length: { maximum: 50 }
+  before_save :default_values
+  validates :name,  presence: true, uniqueness: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, allow_blank: true
+
+  def default_values
+    self.avatarFileName  ||= 'avatar.png'
+  end
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -39,7 +44,7 @@ class User < ActiveRecord::Base
   end
 
   def fullName
-    if firstName == '' || lastName == ''
+    if !firstName || !lastName
       return name
     else
       return firstName + ' ' + lastName

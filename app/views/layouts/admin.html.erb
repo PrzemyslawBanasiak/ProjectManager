@@ -25,13 +25,12 @@
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <%= image_tag(current_user.avatarFileName, :class => "user-image", :alt => "User Image") %>
-
             <span class="hidden-xs"><%= current_user.fullName %></span>
           </a>
           <ul class="dropdown-menu pull-right">
             <!-- User image -->
             <li class="user-header">
-              <%= image_tag(current_user.avatarFileName, :class => 'img-circle', :alt => "User Image") %>
+              <%= image_tag(current_user[:avatarFileName], :class => 'img-circle', :alt => "User Image") %>
 
               <p>
                 <%= current_user.fullName %>
@@ -53,8 +52,11 @@
       </div>
     </nav>
   </header>
-  <%= render template: 'layouts/side-menu' %>
+  <%= render template: 'shared/side-menu' %>
   <div class="content-wrapper">
+        <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
         <%= yield %>
   </div>
 

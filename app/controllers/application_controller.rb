@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   protected
   def layout_by_resource
-    if  request.env['PATH_INFO'] == '/login' || request.env['PATH_INFO'] == '/signup'
+    if  request.env['PATH_INFO'] == '/login' || request.env['PATH_INFO'] == '/signup' || (request.method == "POST" && request.env['PATH_INFO'] == '/users' )
       "application"
     else
       "admin"
