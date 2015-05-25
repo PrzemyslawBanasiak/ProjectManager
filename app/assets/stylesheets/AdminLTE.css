@@ -11,7 +11,7 @@
  * -------------------------
  */
 html,
-body {
+body, #wrapper {
     min-height: 100%;
 }
 .layout-boxed html,
@@ -4422,4 +4422,12 @@ fieldset[disabled] .btn-vk.active {
     .table-responsive > .table tr td {
         white-space: normal!important;
     }
+}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+
+    display: flex;
+    align-items: center;
 }
