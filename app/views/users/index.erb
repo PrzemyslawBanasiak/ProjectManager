@@ -1,0 +1,30 @@
+<section class="content-header">
+  <h1>
+    Users
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-user"></i> User</a></li>
+    <li class="active">Users</li>
+  </ol>
+</section>
+
+<section class="content">
+  <ul class="list-group">
+    <% @users.each do |user| %>
+        <%= link_to(user, :class => "list-group-item col-md-12") do %>
+            <div class="col-md-1">
+              <%= image_tag(current_user.avatarFileName, :class => 'img-circle img-responsive', :alt => "User Image") %>
+            </div>
+            <% if user.id == 1 %>
+                <div class="badge col-md-1">Admin</div>
+            <% end %>
+            <div class="col-md-10">
+            <span>
+                <p><b><%= user.name %></b></p>
+                <p><%= user.firstName %> <%= user.lastName %></p>
+            </span>
+            </div>
+        <% end %>
+    <% end %>
+  </ul>
+</section>
