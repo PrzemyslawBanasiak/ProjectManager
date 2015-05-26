@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
+  include ProjectsHelper
   protect_from_forgery with: :exception
   before_filter :require_login
   layout :layout_by_resource
@@ -19,4 +20,5 @@ class ApplicationController < ActionController::Base
       redirect_to '/login'
     end
   end
+
 end

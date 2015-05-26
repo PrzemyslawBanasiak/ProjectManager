@@ -1,0 +1,27 @@
+<% provide(:title, "Create Project") %>
+
+<section class="content-header">
+
+  <div class="wrapper2">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(@project, :html => {:class => "form-signin"}) do |f| %>
+          <h2 class="form-signin-heading">New project</h2>
+          <div class="top-buffer"/>
+          <%= f.text_field :name, class: 'form-control', placeholder: :name %>
+          <div class="top-buffer"/>
+          <%= f.text_field :description, class: 'form-control', placeholder: :description %>
+          <div class="top-buffer"/>
+          <%= f.text_field :start_time, class: 'form-control', placeholder: :start_time  %>
+          <div class="top-buffer"/>
+          <%= f.text_field :end_time, class: 'form-control', placeholder: :end_time  %>
+          <div class="top-buffer"/><br/>
+          <%= f.submit "Create", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+
+
+</section>

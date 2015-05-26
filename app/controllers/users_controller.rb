@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = 'Your account has been created, you should wait for admin confirmation.'
+      flash[:success] = 'Another success in your life, congratulations.'
       redirect_to '/login'
     else
       render 'new'
