@@ -11,9 +11,9 @@
           <div class="top-buffer"/>
           <%= f.text_field :description, class: 'form-control', placeholder: :description %>
           <div class="top-buffer"/>
-          <%= f.text_field :start_time, class: 'form-control', placeholder: :start_time  %>
+          <%= f.text_field :start_time, placeholder: :start_time, class: 'form-control', :data => {:provide => "datepicker"} %>
           <div class="top-buffer"/>
-          <%= f.text_field :end_time, class: 'form-control', placeholder: :end_time  %>
+          <%= f.text_field :end_time, placeholder: :end_time, class: 'form-control', :data => {:provide => "datepicker"} %>
           <div class="top-buffer"/><br/>
           <%= f.submit "Create", class: "btn btn-primary" %>
       <% end %>

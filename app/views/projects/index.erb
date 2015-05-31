@@ -1,0 +1,27 @@
+<section class="content-header">
+  <h1>
+    Projects
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-user"></i> Project</a></li>
+    <li class="active">Projects</li>
+  </ol>
+</section>
+
+<section class="content">
+  <ul class="list-group">
+    <% @projects.each do |project| %>
+        <%= link_to(project, :class => "list-group-item col-md-12") do %>
+           <div class="col-md-1">
+              <%= image_tag(project.avatarFileName, :class => 'img-responsive', :alt => "Project Image") %>
+            </div>
+            <div class="col-md-10">
+            <span>
+                <p><b><%= project.name %></b></p>
+                <p><%= project.description %> <%= project.start_time %><%= project.end_time %></p>
+            </span>
+            </div>
+        <% end %>
+    <% end %>
+  </ul>
+</section>

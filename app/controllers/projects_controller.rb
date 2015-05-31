@@ -1,32 +1,23 @@
 class ProjectsController < ApplicationController
   skip_before_filter :require_login
 
-  def show
-    #@projectas = Project.all
-    @project = Project.find(params[:id])
-    @readOnly = @project != current_project
+  def index
+    @projects = Project.all
   end
 
-  def choose
-   @projectas = Project.all
-    #@project = Project.find(params[:id])
-    #@readOnly = @project != current_project
+  def show
+    @project = Project.find(params[:id])
   end
 
   def new
-   # if current_project
-   #   redirect_to '/projects/show.html'
-   # end
-      #redirect_to '/projects/new'
       @project = Project.new
   end
 
   def create
     @project = Project.new(project_params)
     if @project.save
-      store_current_project  @project
       flash[:success] = 'Congratulations, new project created!'
-      redirect_to '/'
+      redirect_to @project
     else
       flash.now[:danger] = 'Invalid sth sth'
       render  '/'
@@ -35,14 +26,16 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    if @project != current_project
-      flash[:alert] = "Cant edit current project, temporarily ^^"
-    else
-      if @project.update_attributes(project_params)
-        flash[:success] = "Project updated"
-      end
+    if @project.update_attributes(project_params)
+      flash[:success] = "Project updated"
     end
     redirect_to @project
+  end
+
+  def destroy
+    Project.delete(params[:id])
+    redirect_to :action => 'index'
+    flash[:success] = "Project deleted"
   end
 
   private

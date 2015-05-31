@@ -1,12 +1,8 @@
 class Project < ActiveRecord::Base
+  before_save :default_values
 
-    def remember
-    self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
+  def default_values
+    self.avatarFileName  ||= 'projectAvatar.png'
   end
 
-  def forget
-    update_attribute(:remember_digest, nil)
-  end
-  
 end
