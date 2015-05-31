@@ -19,8 +19,7 @@ class ProjectsController < ApplicationController
       flash[:success] = 'Congratulations, new project created!'
       redirect_to @project
     else
-      flash.now[:danger] = 'Invalid sth sth'
-      render  '/'
+      render 'new'
     end
   end
 
