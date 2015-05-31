@@ -41,7 +41,7 @@
                 <div class="form-group row">
                   <%= f.label :start_time, class: 'col-sm-2 control-label' %>
                   <div class="col-sm-9">
-                    <%= f.text_field :end_time, readonly: @readOnly, class: 'form-control', :data => {:provide => "datepicker"} %>
+                    <%= f.text_field :start_time, readonly: @readOnly, class: 'form-control', :data => {:provide => "datepicker"} %>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -60,9 +60,9 @@
         <% if (!@readOnly) %>
             <div class="box-footer">
               <div class="form-group column">
-                <submit class="pull-right">
-                  <%= f.submit "Submit", class: "btn btn-default" %>
-                </submit>
+                <button_to class="pull-right">
+                  <%= button_to 'Update', @project, method: :update, :class => "btn btn-default"%>
+                </button_to>
                 <button_to class="pull-left">
                   <%= button_to 'Delete', @project, method: :delete, data: { confirm: 'Are you sure you want to delete this project?' },  :class => "btn btn-default"%>
                 </button_to>
