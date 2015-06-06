@@ -9,14 +9,18 @@ class TasksController < ApplicationController
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.new()
+    @projects = Project.all
+    @users = User.all
   end
 
   def edit
   end
 
   def create
-    @task = Task.new(task_params)
+    @projects = Project.all
+    @users = User.all
+    @task = current_user.tasks.new(task_params)
 
     if @task.save
       flash[:success] = 'Congratulations, new task created!'
