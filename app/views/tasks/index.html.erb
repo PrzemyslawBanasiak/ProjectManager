@@ -1,0 +1,62 @@
+<section class="content-header">
+  <h1>
+    Listing Tasks
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-tasks"></i> Tasks</a></li>
+    <li class="active">Tasks</li>
+  </ol>
+</section>
+
+<section class="content">
+  <ul class="list-group">
+    <% @tasks.each do |task| %>
+        <%= link_to(task, :class => "list-group-item col-md-12") do %>
+            <div class="col-md-10">
+            <span>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>Project</th>
+                    <th>Name</th>
+                    <th>Parent</th>
+                    <th>Description</th>
+                    <th>Created by</th>
+                    <th>Closed by</th>
+                    <th>Assignee</th>
+                    <th>Created at</th>
+                    <th>Closed at</th>
+                    <th>Estimate</th>
+                    <th>Task state</th>
+                    <th colspan="3"></th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                      <td><%= task.id %></td>
+                      <td><%= task.project_id %></td>
+                      <td><%= task.name %></td>
+                      <td><%= task.parent_id %></td>
+                      <td><%= task.description %></td>
+                      <td><%= task.created_by %></td>
+                      <td><%= task.closed_by %></td>
+                      <td><%= task.assignee %></td>
+                      <td><%= task.created_at %></td>
+                      <td><%= task.closed_at %></td>
+                      <td><%= task.estimate %></td>
+                      <td><%= task.task_state %></td>
+                      <td><%= link_to 'Edit', edit_task_path(task) %></td>
+                      <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    </tr>
+                </tbody>
+              </table>
+            </span>
+            </div>
+        <% end %>
+    <% end %>
+  </ul>
+</section>
+
+<%= link_to 'New Task', new_task_path %>
