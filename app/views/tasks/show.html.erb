@@ -1,4 +1,15 @@
-<p id="notice"><%= notice %></p>
+<section class="content-header">
+  <h1>
+    Tasks
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-tasks"></i> Tasks</a></li>
+    <li class="active">Task <%= @task.id %></li>
+  </ol>
+</section>
+
+<section class="content">
+  <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Id:</strong>
@@ -7,17 +18,12 @@
 
 <p>
   <strong>Project:</strong>
-  <%= @task.project_id %>
+  <%= link_to @task.project.name, @task.project %>
 </p>
 
 <p>
   <strong>Name:</strong>
   <%= @task.name %>
-</p>
-
-<p>
-  <strong>Parent:</strong>
-  <%= @task.parent_id %>
 </p>
 
 <p>
@@ -62,3 +68,4 @@
 
 <%= link_to 'Edit', edit_task_path(@task) %> |
 <%= link_to 'Back', tasks_path %>
+</section>
