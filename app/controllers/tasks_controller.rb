@@ -21,6 +21,8 @@ class TasksController < ApplicationController
     @projects = Project.all
     @users = User.all
     @task = current_user.tasks.new(task_params)
+    @task.project_id= params[:project_id_tag]
+    @task.assignee= params[:assignee_tag]
 
     if @task.save
       flash[:success] = 'Congratulations, new task created!'
