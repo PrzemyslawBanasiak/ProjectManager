@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :tasks
+  has_many :work_logs
   attr_accessor :remember_token
   before_save { self.email = email.downcase }
   before_save :default_values

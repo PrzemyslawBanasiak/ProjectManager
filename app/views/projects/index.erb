@@ -10,20 +10,22 @@
 
 <section class="content">
   <ul class="list-group">
-    <% @projects.each do |project| %>
-        <%= link_to(project, :class => "list-group-item col-md-12") do %>
-           <div class="col-md-1">
-              <%= image_tag(project.avatarFileName, :class => 'img-responsive', :alt => "Project Image") %>
-            </div>
-            <div class="col-md-10">
-            <span>
-                <p><b><%= project.name %></b></p>
-                <p><%= project.description %></p>
-                <p><%= project.start_time %>></p>
-                <p><%= project.end_time %></p>
-            </span>
-            </div>
-        <% end %>
+    <% @projects.order(id: :desc).each do |project| %>
+        <div class="col-md-3 box box-primary">
+          <%= link_to(project) do %>
+              <div class="col-md-4">
+                <%= image_tag(project.avatarFileName, :class => 'img-responsive', :alt => "Project Image") %>
+              </div>
+              <div class="col-md-8">
+                <span>
+                    <p><b><%= project.name %></b></p>
+                    <p><%= project.description %></p>
+                    <p>From: <%= project.start_time %></p>
+                    <p>To: <%= project.end_time %></p>
+                </span>
+              </div>
+          <% end %>
+        </div>
     <% end %>
   </ul>
 </section>

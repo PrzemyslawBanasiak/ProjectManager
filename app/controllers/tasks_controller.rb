@@ -12,6 +12,9 @@ class TasksController < ApplicationController
     @task = current_user.tasks.new()
     @projects = Project.all
     @users = User.all
+    if(params[:project_id])
+      @selected_project = Project.find(params[:project_id])
+    end
   end
 
   def edit
@@ -21,7 +24,7 @@ class TasksController < ApplicationController
     @projects = Project.all
     @users = User.all
     @task = current_user.tasks.new(task_params)
-    @task.project_id= params[:project_id_tag]
+    @task.project_id ||= params[:project_id_tag]
     @task.assignee= params[:assignee_tag]
 
     if @task.save

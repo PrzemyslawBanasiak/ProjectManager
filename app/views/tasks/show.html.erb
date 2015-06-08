@@ -73,11 +73,14 @@
         <ul class="list-group">
           <% @task.work_logs.each do |workLog| %>
               <li class="list-group-item col-md-12">
-                <p><%= link_to workLog.user.fullName, workLog.user %> logged <%= workLog.value %>h spent at project</p>
+                <p><%= link_to workLog.user.fullName, workLog.user %> logged <%= workLog.value %>h spent at <%=workLog.created_at.strftime("%b/%d %R")%></p>
                 <% if !workLog.comment.empty? %>
                     <p><b>Comment:</b> <%= workLog.comment %></p>
                 <% end %>
               </li>
+          <% end %>
+          <% if @task.work_logs.empty? %>
+              <li class="list-group-item"> No history yet</li>
           <% end %>
         </ul>
 

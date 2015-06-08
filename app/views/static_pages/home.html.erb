@@ -16,13 +16,14 @@
     <div class="col-lg-3 col-xs-6">
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>150</h3>
-          <p>New Orders</p>
+          <h3><%= Task.where("task_state == 0 OR task_state == 1").count %></h3>
+
+          <p>Open tasks</p>
         </div>
         <div class="icon">
           <i class="ion ion-bag"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <div class="small-box-footer"></div>
       </div>
     </div>
     <!-- ./col -->
@@ -30,38 +31,64 @@
       <!-- small box -->
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>53<sup style="font-size: 20px">%</sup></h3>
-          <p>Bounce Rate</p>
+          <h3><%= Project.where("end_time > ?", Time.zone.now).count %></h3>
+
+          <p>Projects ongoing</p>
         </div>
         <div class="icon">
           <i class="ion ion-stats-bars"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <div class="small-box-footer"></div>
       </div>
     </div>
     <div class="col-lg-3 col-xs-6">
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>44</h3>
-          <p>User Registrations</p>
+          <h3><%= User.count %></h3>
+
+          <p>Users Registered</p>
         </div>
         <div class="icon">
-          <i class="ion ion-person-add"></i>
+          <i class="ion ion-person"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <div class="small-box-footer"></div>
       </div>
     </div>
     <div class="col-lg-3 col-xs-6">
       <div class="small-box bg-red">
         <div class="inner">
-          <h3>65</h3>
-          <p>Unique Visitors</p>
+          <h3><%= WorkLog.where("created_at >= ?", Time.zone.now.beginning_of_day).sum(:value) %></h3>
+
+          <p>Hours logged today</p>
         </div>
         <div class="icon">
           <i class="ion ion-pie-graph"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <div class="small-box-footer"></div>
       </div>
     </div>
   </div>
+  <div class="col-md-7">
+
+  </div>
+  <ul class="timeline col-md-5">
+    <br/>
+    <% WorkLog.order(id: :desc).limit(8).each do |workLog| %>
+        <li>
+          <i class="fa fa-tasks bg-blue"></i>
+          <div class="timeline-item">
+            <span class="time"><i class="fa fa-clock-o"></i> <%= workLog.created_at.strftime("%b/%d %R") %></span>
+            <h3 class="timeline-header"><%= link_to workLog.user.fullName, workLog.user %></h3>
+            <div class="timeline-body">
+              Logged <b><%= workLog.value %>h</b> at <%= link_to workLog.task.name, workLog.task %>
+              (<%= link_to workLog.task.project.name, workLog.task.project %>)
+              <% if workLog.comment %>
+                  <br/>
+                  <p class="message"> <%= workLog.comment %></p>
+              <% end %>
+            </div>
+          </div>
+        </li>
+    <% end %>
+  </ul>
 </section>
