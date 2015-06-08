@@ -39,7 +39,7 @@
 
         <p>
           <strong>Assignee:</strong>
-          <%= link_to @task.user.name, @task.user %>
+          <%= link_to User.find(@task.assignee).fullName, ('/users/' + @task.assignee.to_s) %>
         </p>
 
         <p>

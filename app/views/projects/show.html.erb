@@ -23,9 +23,9 @@
             <p><%= @project.description %></p>
           </div>
            <div class="col-md-4">
-             <p>Starts <%= @project.start_time.strftime('%d %b %Y') %></p>
+             <p>Starts <%= @project.start_time != nil ? @project.start_time.strftime('%d %b %Y') :  @project.start_time %></p>
 
-             <p>Ends <%= @project.end_time.strftime('%d %b %Y') %></p>
+             <p>Ends <%= @project.end_time != nil ? @project.end_time.strftime('%d %b %Y') :  @project.end_time%></p>
            </div>
              <div class="col-md-2">
                <p class="pull-right"><%= link_to "Edit", edit_project_path(@project) %></p>
@@ -102,6 +102,18 @@
       <div class="panel-body">
         <ul class="list-group">
           <%= image_tag(pie_chart_for_tasks, :alt => "Percentage of tasks by each user", :class => 'img-rectangle img-responsive') %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 ">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Burndown chart of project
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <%= image_tag(burndown_chart_of_project, :alt => "Burndown chart of project", :class => 'img-rectangle img-responsive') %>
         </ul>
       </div>
     </div>
