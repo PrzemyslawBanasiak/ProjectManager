@@ -9,28 +9,18 @@
 </section>
 
 <section class="content">
-  <ul class="list-group">
-    <% @tasks.each do |task| %>
-        <%= link_to(task, :class => "list-group-item col-md-12") do %>
-            <div class="col-md-10">
-              <span>
-                <p><b><%= task.name %></b></p>
-                <p><%= task.description %></p>
-                <p><%= task.assignee %></p>
-                <table>
-                  <div class="pull-left">
-                    <%= link_to 'Edit', edit_task_path(task), :class => "btn btn-default" %>
-                  </div>
-                  <div class="pull-left">
-                    <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-default" %>
-                  </div>
-                </table>
-                <div class="form-group row">
-                  <label class="pull-right">Created at <%= task.created_at.strftime('%d %b %Y') %></label>
-                </div>
-              </span>
-            </div>
-        <% end %>
-    <% end %>
-  </ul>
+  <% @tasks.each do |task| %>
+      <div class="col-md-3 box box-primary">
+        <div class="box-header">
+          <%= link_to task.name, task %>
+        </div>
+        <p><%= task.description %></p>
+        <p>Assigned to: <%= link_to task.user.fullName, task.user %></p>
+        <p class="pull-right">
+            <%= link_to '', edit_task_path(task), :class => "fa fa-edit" %>
+            <%= link_to '', task, method: :delete, data: {confirm: 'Are you sure?'}, :class => "fa fa-remove" %>
+        </p>
+        <label>Created at <%= task.created_at.strftime('%d %b %Y') %></label>
+      </div>
+  <% end %>
 </section>

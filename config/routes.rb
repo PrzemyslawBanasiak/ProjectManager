@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   get    'contact' => 'static_pages#contact'
   get    'signup'  => 'users#new'
   get    'login'   => 'sessions#new'
+  get    'logwork' => 'work_logger#new'
+  get    'work_logs' => 'work_logger#new'
+  post   'work_logs' => 'work_logger#create'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   resources :users
