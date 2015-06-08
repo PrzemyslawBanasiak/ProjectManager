@@ -12,19 +12,18 @@
   <ul class="list-group">
     <% @projects.order(id: :desc).each do |project| %>
         <div class="col-md-3 box box-primary">
-          <%= link_to(project) do %>
               <div class="col-md-4">
                 <%= image_tag(project.avatarFileName, :class => 'img-responsive', :alt => "Project Image") %>
               </div>
               <div class="col-md-8">
                 <span>
-                    <p><b><%= project.name %></b></p>
+                  <p></p>
+                    <p><b><%= link_to project.name, project %></b></p>
                     <p><%= project.description %></p>
-                    <p>From: <%= project.start_time %></p>
-                    <p>To: <%= project.end_time %></p>
+                    <p>From: <%= project.start_time != nil ? project.start_time.strftime('%d %b %Y') :  project.start_time %></p>
+                    <p>To: <%= project.end_time != nil ? project.end_time.strftime('%d %b %Y') :  project.end_time %></p>
                 </span>
               </div>
-          <% end %>
         </div>
     <% end %>
   </ul>

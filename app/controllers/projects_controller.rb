@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
+      Project.update(@project.id, :start_time => Time.strptime(project_params[:start_time], "%m/%d/%Y"), :end_time => Time.strptime(project_params[:end_time] , "%m/%d/%Y"))
       flash[:success] = 'Congratulations, new project created!'
       redirect_to @project
     else
@@ -30,6 +31,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(project_params)
+      Project.update(params[:id], :start_time => Time.strptime(project_params[:start_time], "%m/%d/%Y"), :end_time => Time.strptime(project_params[:end_time] , "%m/%d/%Y"))
       flash[:success] = "Project updated"
     end
     redirect_to @project

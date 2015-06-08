@@ -1,3 +1,4 @@
+require 'gchart'
 module ProjectsHelper
   def pie_chart_for_tasks
     count = {}
