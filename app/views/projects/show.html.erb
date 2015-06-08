@@ -94,7 +94,18 @@
       </div>
     </div>
   </div>
-
+  <div class="col-md-4 ">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Percentage of tasks by each user
+      </div>
+      <div class="panel-body">
+        <ul class="list-group">
+          <%= image_tag(pie_chart_for_tasks, :alt => "Percentage of tasks by each user", :class => 'img-rectangle img-responsive') %>
+        </ul>
+      </div>
+    </div>
+  </div>
   <!--
   <div class="col-md-8">
     <%= form_for(@project, :html => {:class => 'form'}) do |f| %>

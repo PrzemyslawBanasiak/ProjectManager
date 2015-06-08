@@ -32,6 +32,9 @@ gem 'bcrypt', '~> 3.1.7'
 # datepicker
 gem 'bootstrap-datepicker-rails', '~> 1.4.0'
 
+# google chart
+gem "googlecharts"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
