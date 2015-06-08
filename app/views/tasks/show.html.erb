@@ -9,63 +9,57 @@
 </section>
 
 <section class="content">
-  <p id="notice"><%= notice %></p>
+  <div class="col-md-5  ">
+    <div class="box box-primary">
+      <div class="box-body">
+        <div class="box-header">
+          <h3 class="box-title">Show Task</h3>
+        </div>
+        <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Id:</strong>
-  <%= @task.id %>
-</p>
+        <p>
+          <strong>Id:</strong>
+          <%= @task.id %>
+        </p>
 
-<p>
-  <strong>Project:</strong>
-  <%= link_to @task.project.name, @task.project %>
-</p>
+        <p>
+          <strong>Project:</strong>
+          <%= link_to @task.project.name, @task.project %>
+        </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @task.name %>
-</p>
+        <p>
+          <strong>Name:</strong>
+          <%= @task.name %>
+        </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @task.description %>
-</p>
+        <p>
+          <strong>Description:</strong>
+          <%= @task.description %>
+        </p>
 
-<p>
-  <strong>Created by:</strong>
-  <%= @task.user_id %>
-</p>
+        <p>
+          <strong>Assignee:</strong>
+          <%= link_to @task.user.name, @task.user %>
+        </p>
 
-<p>
-  <strong>Closed by:</strong>
-  <%= @task.closed_by %>
-</p>
+        <p>
+          <strong>Created at:</strong>
+          <%= @task.created_at %>
+        </p>
 
-<p>
-  <strong>Assignee:</strong>
-  <%= @task.assignee %>
-</p>
+        <p>
+          <strong>Estimate:</strong>
+          <%= @task.estimate %>
+        </p>
 
-<p>
-  <strong>Created at:</strong>
-  <%= @task.created_at %>
-</p>
+        <p>
+          <strong>Task state:</strong>
+          <%= @task.task_state_name %>
+        </p>
 
-<p>
-  <strong>Closed at:</strong>
-  <%= @task.closed_at %>
-</p>
-
-<p>
-  <strong>Estimate:</strong>
-  <%= @task.estimate %>
-</p>
-
-<p>
-  <strong>Task state:</strong>
-  <%= @task.task_state %>
-</p>
-
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+        <%= link_to 'Edit', edit_task_path(@task) %> |
+        <%= link_to 'Back', tasks_path %>
+      </div>
+    </div>
+  </div>
 </section>

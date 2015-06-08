@@ -1,67 +1,24 @@
 <% provide(:title, "New Task") %>
 
-<section class="content-header">
-    <div class="col-md-8">
-      <%= form_for(@task) do |f| %>
-        <div class="row">
-          <div class="box box-primary">
-            <div class="box-body">
-              <div class="box-header">
-                <h3 class="box-title">New Task</h3>
-              </div>
-                <%= render 'shared/task_error_messages' %>
-                <div class="form-group row">
-                  <%= f.label :project_id, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-9">
-                    <%= f.select :project_id, options_from_collection_for_select(@projects, :id, :name) %>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-9">
-                    <%= f.text_field :name, readonly: @readOnly, class: 'form-control', placeholder: :name %>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-9">
-                    <%= f.number_field :parent_id, readonly: @readOnly, class: 'form-control', placeholder: :parent_id %>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-9">
-                    <%= f.text_field :description, readonly: @readOnly, class: 'form-control', placeholder: :description %>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <%= f.label :assignee, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-9">
-                    <%= f.select :assignee, options_from_collection_for_select(@users, :id, :fullName) %>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-9">
-                    <%= f.number_field :estimate, readonly: @readOnly, class: 'form-control', placeholder: "Estimate in hours" %>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <div class="col-sm-9">
-                    <%= f.number_field :task_state, readonly: @readOnly, class: 'form-control', placeholder: :task_state %>
-                  </div>
-                </div>
-                <% if (!@readOnly) %>
-                  <div class="box-footer">
-                    <div class="form-group column">
-                      <div class="pull-right">
-                        <%= f.submit "Submit", class: "btn btn-default" %>
-                      </div>
-                      <div class="pull-left">
-                        <%= link_to 'Back', tasks_path, :class => "btn btn-default"%>
-                      </div>
-                    </div>
-                  </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+<section class="content">
+    <div class="wrapper2">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_for(@task, :html => {:class => "form-signin"}) do |f| %>
+            <h2 class="form-signin-heading">New Task</h2>
+            <%= render 'shared/task_error_messages' %>
+            <div class="top-buffer"/>
+            <%= f.text_field :name, class: 'form-control', placeholder: :name %>
+            <div class="top-buffer"/>
+            <%= f.collection_select :project_id, Project.order(:id), :id, :name, class: 'form-control' %>
+            <div class="top-buffer"/>
+            <%= f.text_area :description, class: 'form-control', placeholder: :description  %>
+            <div class="top-buffer"/>
+            <%= f.collection_select :assignee, User.order(:id), :id, :fullName, class: 'form-control' %>
+            <div class="top-buffer"/>
+            <%= f.text_field :estimate, class: 'form-control', placeholder: :estimate  %>
+            <div class="top-buffer"/><br/>
+            <%= f.submit "Create Task", class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
 </section>

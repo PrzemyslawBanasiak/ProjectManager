@@ -1,102 +1,77 @@
 <% provide(:title, "Editing Task") %>
 
 <section class="content-header">
-   <div class="col-md-8">
+  <div class="col-md-6">
     <%= form_for(@task) do |f| %>
-      <div class="row">
-            <div class="box box-primary">
-              <div class="box-body">
-                <div class="box-header">
-                  <h3 class="box-title">New Task</h3>
+        <div class="row">
+          <div class="box box-primary ">
+            <div class="box-body">
+              <div class="box-header">
+                <h3 class="box-title">Edit Task</h3>
+              </div>
+              <%= render 'shared/task_error_messages' %>
+              <div class="form-group row">
+                <%= f.label :id, class: 'col-sm-2 control-label' %>
+                <div class="col-sm-10">
+                  <%= f.number_field :id, readonly: true, class: 'form-control' %>
                 </div>
-                <%= render 'shared/task_error_messages' %>
-                <div class="form-group row">
-                  <%= f.label :id, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.number_field :id, readonly: @readOnly, class: 'form-control' %>
-                  </div>
+              </div>
+              <div class="form-group row">
+                <%= f.label :project_id, class: 'col-sm-2 control-label' %>
+                <div class="col-sm-10">
+                  <%= f.collection_select :project_id, Project.order(:id), :id, :name, class: 'form-control' %>
                 </div>
-                <div class="form-group row">
-                  <%= f.label :project_id, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.number_field :project_id, readonly: @readOnly, class: 'form-control' %>
-                  </div>
+              </div>
+              <div class="form-group row">
+                <%= f.label :name, class: 'col-sm-2 control-label' %>
+                <div class="col-sm-10">
+                  <%= f.text_field :name, class: 'form-control' %>
                 </div>
-                <div class="form-group row">
-                  <%= f.label :name, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.text_field :name, readonly: @readOnly, class: 'form-control' %>
-                  </div>
+              </div>
+              <div class="form-group row">
+                <%= f.label :description, class: 'col-sm-2 control-label' %>
+                <div class="col-sm-10">
+                  <%= f.text_field :description, class: 'form-control' %>
                 </div>
-                <div class="form-group row">
-                  <%= f.label :parent_id, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.number_field :parent_id, readonly: @readOnly, class: 'form-control' %>
-                  </div>
+              </div>
+              <div class="form-group row">
+                <%= f.label 'Assignee', class: 'col-sm-2 control-label' %>
+                <div class="col-sm-10">
+                  <%= f.collection_select :user_id, User.order(:id), :id, :fullName, class: 'form-control' %>
                 </div>
-                <div class="form-group row">
-                  <%= f.label :description, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.text_field :description, readonly: @readOnly, class: 'form-control' %>
-                  </div>
+              </div>
+              <div class="form-group row">
+                <%= f.label :created_at, class: 'col-sm-2 control-label' %>
+                <div class="col-sm-10">
+                  <%= f.text_field :created_at, placeholder: :created_at, class: 'form-control', readonly: true, :data => {:provide => "datepicker"} %>
                 </div>
-                <div class="form-group row">
-                  <%= f.label :user_id, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.number_field :user_id, readonly: @readOnly, class: 'form-control' %>
-                  </div>
+              </div>
+              <div class="form-group row">
+                <%= f.label :estimate, class: 'col-sm-2 control-label' %>
+                <div class="col-sm-10">
+                  <%= f.number_field :estimate, class: 'form-control' %>
                 </div>
-                <div class="form-group row">
-                  <%= f.label :closed_by, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.number_field :closed_by, readonly: @readOnly, class: 'form-control' %>
-                  </div>
+              </div>
+              <div class="form-group row">
+                <%= f.label :task_state, class: 'col-sm-2 control-label' %>
+                <div class="col-sm-10">
+
+                  <%= f.select :task_state, options_for_select([["To Do", 0], ["In Progress", 1], ["Done", 2]]), class: 'form-control' %>
                 </div>
-                <div class="form-group row">
-                  <%= f.label :assignee, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.number_field :assignee, readonly: @readOnly, class: 'form-control' %>
-                  </div>
+              </div>
+              <div class="box-footer">
+                <div class="pull-right">
+                  <%= f.submit "Submit", class: "btn btn-default" %>
                 </div>
-                <div class="form-group row">
-                  <%= f.label :created_at, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.datetime_select :created_at, readonly: @readOnly, class: 'form-control' %>
-                  </div>
+                <div class="pull-left">
+                  <%= link_to 'Show', @task, :class => "btn btn-default" %>
+                  <%= link_to 'Back', tasks_path, :class => "btn btn-default" %>
                 </div>
-                <div class="form-group row">
-                  <%= f.label :closed_at, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.datetime_select :closed_at, readonly: @readOnly, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <%= f.label :estimate, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.number_field :estimate, readonly: @readOnly, class: 'form-control' %>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <%= f.label :task_state, class: 'col-sm-1 control-label' %>
-                  <div class="col-sm-6">
-                    <%= f.number_field :task_state, readonly: @readOnly, class: 'form-control' %>
-                  </div>
-                </div>
-                <% if (!@readOnly) %>
-                  <div class="box-footer">
-                    <div class="pull-right">
-                      <%= f.submit "Submit", class: "btn btn-default" %>
-                    </div>
-                    <div class="pull-left">
-                      <%= link_to 'Show', @task, :class => "btn btn-default"%>
-                      <%= link_to 'Back', tasks_path, :class => "btn btn-default"%>
-                      </div>
-                    </div>
-                  </div>
-              <% end %>
+              </div>
             </div>
           </div>
         </div>
-      <% end %>
+        </div>
+    <% end %>
     </div>
-</section>
+    </section>
