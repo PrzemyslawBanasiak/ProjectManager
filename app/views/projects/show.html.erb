@@ -23,9 +23,9 @@
             <p><%= @project.description %></p>
           </div>
            <div class="col-md-4">
-             <p>Starts <%= @project.start_time %></p>
+             <p>Starts <%= @project.start_time.strftime('%d %b %Y') %></p>
 
-             <p>Ends <%= @project.end_time %></p>
+             <p>Ends <%= @project.end_time.strftime('%d %b %Y') %></p>
            </div>
              <div class="col-md-2">
                <p class="pull-right"><%= link_to "Edit", edit_project_path(@project) %></p>

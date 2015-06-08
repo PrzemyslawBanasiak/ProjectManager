@@ -19,8 +19,8 @@
             <span>
                 <p><b><%= project.name %></b></p>
                 <p><%= project.description %></p>
-                <p><%= project.start_time %>></p>
-                <p><%= project.end_time %></p>
+                <p><%= project.start_time != nil ? project.start_time.strftime('%d %b %Y') :  project.start_time %></p>
+                <p><%= project.end_time != nil ? project.end_time.strftime('%d %b %Y') :  project.end_time %></p>
             </span>
             </div>
         <% end %>
