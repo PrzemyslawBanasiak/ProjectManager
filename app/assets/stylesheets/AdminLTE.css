@@ -1557,7 +1557,8 @@ input[type="password"] {
     background: #ffffff;
     border-top: 3px solid #d2d6de;
     margin-bottom: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     width: 100%;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 
@@ -4432,4 +4433,10 @@ fieldset[disabled] .btn-vk.active {
 
     display: flex;
     align-items: center;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

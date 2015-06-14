@@ -68,27 +68,33 @@
       </div>
     </div>
   </div>
-  <div class="col-md-7">
+  <div class="row">
+    <div class="col-md-7"></div>
+    <div class="col-md-5">
+      <ul class="timeline">
+        <br/>
+        <% WorkLog.order(id: :desc).limit(8).each do |workLog| %>
+            <li>
+              <i class="fa fa-tasks bg-blue"></i>
 
+              <div class="timeline-item">
+                <span class="time"><i class="fa fa-clock-o"></i> <%= workLog.created_at.strftime("%b/%d %R") %></span>
+
+                <h3 class="timeline-header"><%= link_to workLog.user.fullName, workLog.user %></h3>
+
+                <div class="timeline-body">
+                  Logged <b><%= workLog.value %>h</b> at <%= link_to workLog.task.name, workLog.task %>
+                  (<%= link_to workLog.task.project.name, workLog.task.project %>)
+                  <% if workLog.comment %>
+                      <br/>
+
+                      <p class="message"> <%= workLog.comment %></p>
+                  <% end %>
+                </div>
+              </div>
+            </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-  <ul class="timeline col-md-5">
-    <br/>
-    <% WorkLog.order(id: :desc).limit(8).each do |workLog| %>
-        <li>
-          <i class="fa fa-tasks bg-blue"></i>
-          <div class="timeline-item">
-            <span class="time"><i class="fa fa-clock-o"></i> <%= workLog.created_at.strftime("%b/%d %R") %></span>
-            <h3 class="timeline-header"><%= link_to workLog.user.fullName, workLog.user %></h3>
-            <div class="timeline-body">
-              Logged <b><%= workLog.value %>h</b> at <%= link_to workLog.task.name, workLog.task %>
-              (<%= link_to workLog.task.project.name, workLog.task.project %>)
-              <% if workLog.comment %>
-                  <br/>
-                  <p class="message"> <%= workLog.comment %></p>
-              <% end %>
-            </div>
-          </div>
-        </li>
-    <% end %>
-  </ul>
 </section>

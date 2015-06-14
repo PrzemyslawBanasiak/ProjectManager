@@ -9,13 +9,14 @@
 </section>
 
 <section class="content">
+  <div id="row">
   <% @tasks.each do |task| %>
       <div class="col-md-3 box box-primary">
-        <div class="box-header">
+        <div class="box-header ellipsis">
           <%= link_to task.name, task %>
         </div>
-        <p><%= task.description %></p>
-        <p>Assigned to: <%= link_to task.user.fullName, task.user %></p>
+        <p class="ellipsis"><%= task.description %></p>
+        <p class="ellipsis">Assigned to: <%= link_to task.user.fullName, task.user %></p>
         <p class="pull-right">
             <%= link_to '', edit_task_path(task), :class => "fa fa-edit" %>
             <%= link_to '', task, method: :delete, data: {confirm: 'Are you sure?'}, :class => "fa fa-remove" %>
@@ -23,4 +24,5 @@
         <label>Created at <%= task.created_at.strftime('%d %b %Y') %></label>
       </div>
   <% end %>
+  </div>
 </section>

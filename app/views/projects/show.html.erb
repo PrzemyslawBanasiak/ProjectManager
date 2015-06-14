@@ -22,12 +22,12 @@
 
             <p><%= @project.description %></p>
           </div>
-           <div class="col-md-4">
-             <p>Starts <%= @project.start_time != nil ? @project.start_time.strftime('%d %b %Y') :  @project.start_time %></p>
+           <div class="col-md-3">
+             <p>Starts <%= @project.start_time != nil ? @project.start_time.strftime('%d %b %Y') : @project.start_time %></p>
 
-             <p>Ends <%= @project.end_time != nil ? @project.end_time.strftime('%d %b %Y') :  @project.end_time%></p>
+             <p>Ends <%= @project.end_time != nil ? @project.end_time.strftime('%d %b %Y') : @project.end_time %></p>
            </div>
-             <div class="col-md-1">
+             <div class="col-md-2">
                <p><%= link_to ' Edit', edit_project_path(@project), class: 'fa fa-edit' %></p>
 
                <p><%= link_to ' Delete', @project, method: :delete, data: {confirm: 'Are you sure?'}, :class => "fa fa-remove" %></p>
@@ -45,86 +45,88 @@
   <div class="col-md-12">
     <br/>
   </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Open
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <% @project.tasks.where(task_state: 0).each do |task| %>
+                <li class="list-group-item col-md-12" draggable="true">
+                  <p><b><%= link_to task.name, task %></b></p>
 
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Open
+                  <p><%= task.description %></p>
+                </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-      <div class="panel-body">
-        <ul class="list-group">
-          <% @project.tasks.where(task_state: 0).each do |task| %>
-              <li class="list-group-item col-md-12" draggable="true">
-                <p><b><%= link_to task.name, task %></b></p>
+    </div>
 
-                <p><%= task.description %></p>
-              </li>
-          <% end %>
-        </ul>
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          In Progress
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <% @project.tasks.where(task_state: 1).each do |task| %>
+                <li class="list-group-item col-md-12" draggable="true">
+                  <p><b><%= link_to task.name, task %></b></p>
+
+                  <p><%= task.description %></p>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Closed
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <% @project.tasks.where(task_state: 2).each do |task| %>
+                <li class="list-group-item col-md-12" draggable="true">
+                  <p><b><%= link_to task.name, task %></b></p>
+
+                  <p><%= task.description %></p>
+                </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        In Progress
-      </div>
-      <div class="panel-body">
-        <ul class="list-group">
-          <% @project.tasks.where(task_state: 1).each do |task| %>
-              <li class="list-group-item col-md-12" draggable="true">
-                <p><b><%= link_to task.name, task %></b></p>
-
-                <p><%= task.description %></p>
-              </li>
-          <% end %>
-        </ul>
+  <div class="row">
+    <div class="col-md-4 ">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Percentage of tasks by each user
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <%= image_tag(pie_chart_for_tasks, :alt => "Percentage of tasks by each user", :class => 'img-rectangle img-responsive') %>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Closed
-      </div>
-      <div class="panel-body">
-        <ul class="list-group">
-          <% @project.tasks.where(task_state: 2).each do |task| %>
-              <li class="list-group-item col-md-12" draggable="true">
-                <p><b><%= link_to task.name, task %></b></p>
-
-                <p><%= task.description %></p>
-              </li>
-          <% end %>
-        </ul>
+    <div class="col-md-4 ">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Burndown chart of project
+        </div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <%= image_tag(burndown_chart_of_project, :alt => "Burndown chart of project", :class => 'img-rectangle img-responsive') %>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-4 ">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Percentage of tasks by each user
-      </div>
-      <div class="panel-body">
-        <ul class="list-group">
-          <%= image_tag(pie_chart_for_tasks, :alt => "Percentage of tasks by each user", :class => 'img-rectangle img-responsive') %>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4 ">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        Burndown chart of project
-      </div>
-      <div class="panel-body">
-        <ul class="list-group">
-          <%= image_tag(burndown_chart_of_project, :alt => "Burndown chart of project", :class => 'img-rectangle img-responsive') %>
-        </ul>
-      </div>
-    </div>
-  </div>
   </div>
 </section>
