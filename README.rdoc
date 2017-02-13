@@ -5,3 +5,8 @@ School project for Databases course.
 Tool for managing tasks and projects.
 
 Support multiple projects, tasks and displays various statistics.
+
+Demo available at:
+https://tranquil-ravine-3811.herokuapp.com/
+
+https://github.com/PrzemyslawBanasiak/ProjectManager/raw/master/Screenshot_1.png
